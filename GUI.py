@@ -3,53 +3,50 @@ from tkinter import filedialog, Text
 import os
 
 
-import cv2
+"""import cv2
 # import face_recognition
 # import matplotlib.pyplot as plt
 
 
 # =========================================Backend================================================================
 class ImageFinder:
-    def __init__(self, image_path, images_folder_path):
-        self.no_img_saved = 0
-        self.no_img_compared = 0
+    def __init__(self,image_path,images_folder_path):
+        self.no_img_saved=0
+        self.no_img_compared=0
         self.image_path = image_path
         self.images_folder_path = images_folder_path
-
+        
         self.image_train = face_recognition.load_image_file(self.image_path)
-        self.image_train_converted = cv2.cvtColor(
-            self.image_train, cv2.COLOR_BGR2RGB)
+        self.image_train_converted = cv2.cvtColor(self.image_train,cv2.COLOR_BGR2RGB)
+        
+        self.encode_image_train = face_recognition.face_encodings(self.image_train_converted)
+        
+        
 
-        self.encode_image_train = face_recognition.face_encodings(
-            self.image_train_converted)
-
+        
     def match_images(self):
 
         for filename in os.listdir(self.images_folder_path):
-            self.no_img_compared += 1
-            image_query = face_recognition.load_image_file(
-                os.path.join(self.images_folder_path, filename))
-            image_query_converted = cv2.cvtColor(
-                image_query, cv2.COLOR_BGR2RGB)
+            self.no_img_compared+=1
+            image_query = face_recognition.load_image_file(os.path.join(self.images_folder_path,filename))
+            image_query_converted = cv2.cvtColor(image_query,cv2.COLOR_BGR2RGB)
             print(f"Image Number: {no_img_compared}")
-
-            encode_image_query = face_recognition.face_encodings(
-                image_query_converted)
-
+       
+            encode_image_query = face_recognition.face_encodings(image_query_converted)
+       
             if encode_image_query is not None:
                 for face in encode_image_query:
-                    if(self.compare(self.encode_image_train[0], face)):
-                        self.no_img_saved += 1
+                    if(self.compare(self.encode_image_train[0],face)):
+                        self.no_img_saved+=1
                         print(f"saving image:{no_img_saved}")
-                        cv2.imwrite(
-                            f"{save_folder_path}//your_pic_{no_img_saved}.jpg", image_query_converted)
+                        cv2.imwrite(f"{save_folder_path}//your_pic_{no_img_saved}.jpg",image_query_converted)
                         break
-
-    def compare(self, encode_base, encode_target):
-        return face_recognition.compare_faces([encode_base], encode_target)
-
-# ============================================================================================================
-
+    
+    def compare(self,encode_base,encode_target):
+        return face_recognition.compare_faces([encode_base],encode_target)
+    
+#============================================================================================================
+"""
 
 # ==============================================FrontEnd======================================================
 root = tk.Tk()
