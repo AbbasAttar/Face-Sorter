@@ -50,6 +50,7 @@ class ImageFinder:
                             self.no_img_saved += 1
                             print(f"saving image:{self.no_img_saved}")
                             im = PIL.Image.fromarray(image_query)
+                            im = im.convert('RGB')
                             im = im.save(self.save_folder_path,f"your_pic_{self.no_img_saved}.jpg")
                             break
                 else:
